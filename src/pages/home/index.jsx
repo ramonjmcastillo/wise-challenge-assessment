@@ -8,6 +8,7 @@ import {
   TableCell,
   TableSortLabel,
   TableRow,
+  TablePagination,
 } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { GET_EPOCHES } from "../../apollo/queries";
@@ -33,6 +34,11 @@ const Home = () => {
   const handleSort = (key) => {
     setOrderBy(key);
     setOrderDirection((prevState) => (prevState === "asc" ? "desc" : "asc"));
+  };
+
+  const handlePageChange = (event, newPage) => {
+    setPage(newPage);
+    setOffset(newPage * limit);
   };
 
   return (
@@ -203,6 +209,13 @@ const Home = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[]}
+        count={-1}
+        page={page}
+        rowsPerPage={limit}
+        onPageChange={handlePageChange}
+      />
     </Box>
   );
 };
