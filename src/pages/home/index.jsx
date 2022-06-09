@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Box,
+  InputBase,
   Table,
   TableBody,
   TableContainer,
@@ -12,6 +13,7 @@ import {
 } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { GET_EPOCHES } from "../../apollo/queries";
+import { formatBigInt } from "../../utilities/utilities";
 
 const Home = () => {
   const [offset, setOffset] = useState(0);
@@ -41,15 +43,23 @@ const Home = () => {
     setOffset(newPage * limit);
   };
 
-  const formatBigInt = (value) => {
-    return Math.round(Number(BigInt(value) / BigInt(Math.pow(10, 18))));
+  const handleSearchChange = (event) => {
+    const value = event.target.value;
+    setStartBlock(value ? parseInt(value, 10) : 0);
   };
 
   return (
     <Box>
       Home
+      <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
+        <InputBase
+          placeholder="Search"
+          type="number"
+          onChange={handleSearchChange}
+        />
+      </Box>
       <TableContainer>
-        <Table stickyHeader>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>
