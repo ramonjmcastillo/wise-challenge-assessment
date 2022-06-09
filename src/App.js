@@ -9,7 +9,6 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Box>
-        <Typography> Wise Challenge </Typography>
         <Home />
       </Box>
     </ApolloProvider>

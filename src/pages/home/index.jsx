@@ -14,6 +14,7 @@ import {
 import { useQuery } from "@apollo/client";
 import { GET_EPOCHES } from "../../apollo/queries";
 import { formatBigInt } from "../../utilities/utilities";
+import { columns } from "../../utilities/tableColumns";
 
 const Home = () => {
   const [offset, setOffset] = useState(0);
@@ -45,12 +46,11 @@ const Home = () => {
 
   const handleSearchChange = (event) => {
     const value = event.target.value;
-    setStartBlock(value ? parseInt(value, 10) : 0);
+    setStartBlock(value ? parseInt(value) : 0);
   };
 
   return (
     <Box>
-      Home
       <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
         <InputBase
           placeholder="Search"
@@ -62,143 +62,20 @@ const Home = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "id"}
-                  direction={orderBy === "id" ? orderDirection : "asc"}
-                  onClick={() => handleSort("id")}
-                >
-                  Id
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "startBlock"}
-                  direction={orderBy === "startBlock" ? orderDirection : "asc"}
-                  onClick={() => handleSort("startBlock")}
-                >
-                  Start Block
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "endBlock"}
-                  direction={orderBy === "endBlock" ? orderDirection : "asc"}
-                  onClick={() => handleSort("endBlock")}
-                >
-                  End Block
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "signalledTokens"}
-                  direction={
-                    orderBy === "signalledTokens" ? orderDirection : "asc"
-                  }
-                  onClick={() => handleSort("signalledTokens")}
-                >
-                  Signalled Tokens
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "stakeDeposited"}
-                  direction={
-                    orderBy === "stakeDeposited" ? orderDirection : "asc"
-                  }
-                  onClick={() => handleSort("stakeDeposited")}
-                >
-                  Stake Deposited
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "totalQueryFees"}
-                  direction={
-                    orderBy === "totalQueryFees" ? orderDirection : "asc"
-                  }
-                  onClick={() => handleSort("totalQueryFees")}
-                >
-                  Total Query Fees
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "taxedQueryFees"}
-                  direction={
-                    orderBy === "taxedQueryFees" ? orderDirection : "asc"
-                  }
-                  onClick={() => handleSort("taxedQueryFees")}
-                >
-                  Taxed Query Fees
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "queryFeesCollected"}
-                  direction={
-                    orderBy === "queryFeesCollected" ? orderDirection : "asc"
-                  }
-                  onClick={() => handleSort("queryFeesCollected")}
-                >
-                  Query Fees Collected
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "curatorQueryFees"}
-                  direction={
-                    orderBy === "curatorQueryFees" ? orderDirection : "asc"
-                  }
-                  onClick={() => handleSort("curatorQueryFees")}
-                >
-                  Curator Query Fees
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "queryFeeRebates"}
-                  direction={
-                    orderBy === "queryFeeRebates" ? orderDirection : "asc"
-                  }
-                  onClick={() => handleSort("queryFeeRebates")}
-                >
-                  Total Rewards
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "totalRewards"}
-                  direction={
-                    orderBy === "totalRewards" ? orderDirection : "asc"
-                  }
-                  onClick={() => handleSort("totalRewards")}
-                >
-                  Total Indexer Rewards
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "totalIndexerRewards"}
-                  direction={
-                    orderBy === "totalIndexerRewards" ? orderDirection : "asc"
-                  }
-                  onClick={() => handleSort("totalIndexerRewards")}
-                >
-                  Total Delegator Rewards
-                </TableSortLabel>
-              </TableCell>
-              <TableCell>
-                <TableSortLabel
-                  active={orderBy === "totalDelegatorRewards"}
-                  direction={
-                    orderBy === "totalDelegatorRewards" ? orderDirection : "asc"
-                  }
-                  onClick={() => handleSort("totalDelegatorRewards")}
-                >
-                  Total Delegator Rewards
-                </TableSortLabel>
-              </TableCell>
+              {columns.map((column) => {
+                return (
+                  <TableCell>
+                    <TableSortLabel
+                      active={orderBy === column.id}
+                      direction={orderBy === column.id ? orderDirection : "asc"}
+                      key={column.id}
+                      onClick={() => handleSort(column.id)}
+                    >
+                      {column.label}
+                    </TableSortLabel>
+                  </TableCell>
+                );
+              })}
             </TableRow>
           </TableHead>
           <TableBody>
