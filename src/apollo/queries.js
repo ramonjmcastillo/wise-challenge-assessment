@@ -18,16 +18,16 @@ export const GET_EPOCHES = gql`
       id
       startBlock
       endBlock
+      signalledTokens
+      stakeDeposited
       totalQueryFees
-      totalRewards
+      taxedQueryFees
       queryFeesCollected
       curatorQueryFees
       queryFeeRebates
+      totalRewards
       totalIndexerRewards
       totalDelegatorRewards
-      signalledTokens
-      stakeDeposited
-      taxedQueryFees
     }
   }
 `;
