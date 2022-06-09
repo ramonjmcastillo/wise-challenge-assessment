@@ -56,6 +56,9 @@ const Home = () => {
           placeholder="Search"
           type="number"
           onChange={handleSearchChange}
+          onKeyDown={(e) =>
+            ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault()
+          }
         />
       </Box>
       <TableContainer>
@@ -64,11 +67,10 @@ const Home = () => {
             <TableRow>
               {columns.map((column) => {
                 return (
-                  <TableCell>
+                  <TableCell key={column.id}>
                     <TableSortLabel
                       active={orderBy === column.id}
                       direction={orderBy === column.id ? orderDirection : "asc"}
-                      key={column.id}
                       onClick={() => handleSort(column.id)}
                     >
                       {column.label}

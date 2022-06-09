@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Typography, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./apollo/client";
 import Home from "./pages/home";
