@@ -8,7 +8,7 @@ import Home from "./pages/home";
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Box>
+      <Box sx={{ padding: "32px" }}>
         <Home />
       </Box>
     </ApolloProvider>
