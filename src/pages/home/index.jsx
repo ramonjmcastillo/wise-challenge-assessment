@@ -41,6 +41,10 @@ const Home = () => {
     setOffset(newPage * limit);
   };
 
+  const formatBigInt = (value) => {
+    return Math.round(Number(BigInt(value) / BigInt(Math.pow(10, 18))));
+  };
+
   return (
     <Box>
       Home
@@ -194,16 +198,22 @@ const Home = () => {
                   <TableCell>{epoch.id}</TableCell>
                   <TableCell>{epoch.startBlock}</TableCell>
                   <TableCell>{epoch.endBlock}</TableCell>
-                  <TableCell>{epoch.signalledTokens}</TableCell>
-                  <TableCell>{epoch.stakeDeposited}</TableCell>
-                  <TableCell>{epoch.totalQueryFees}</TableCell>
-                  <TableCell>{epoch.taxedQueryFees}</TableCell>
-                  <TableCell>{epoch.queryFeesCollected}</TableCell>
-                  <TableCell>{epoch.curatorQueryFees}</TableCell>
-                  <TableCell>{epoch.queryFeeRebates}</TableCell>
-                  <TableCell>{epoch.totalRewards}</TableCell>
-                  <TableCell>{epoch.totalIndexerRewards}</TableCell>
-                  <TableCell>{epoch.totalDelegatorRewards}</TableCell>
+                  <TableCell>{formatBigInt(epoch.signalledTokens)}</TableCell>
+                  <TableCell>{formatBigInt(epoch.stakeDeposited)}</TableCell>
+                  <TableCell>{formatBigInt(epoch.totalQueryFees)}</TableCell>
+                  <TableCell>{formatBigInt(epoch.taxedQueryFees)}</TableCell>
+                  <TableCell>
+                    {formatBigInt(epoch.queryFeesCollected)}
+                  </TableCell>
+                  <TableCell>{formatBigInt(epoch.curatorQueryFees)}</TableCell>
+                  <TableCell>{formatBigInt(epoch.queryFeeRebates)}</TableCell>
+                  <TableCell>{formatBigInt(epoch.totalRewards)}</TableCell>
+                  <TableCell>
+                    {formatBigInt(epoch.totalIndexerRewards)}
+                  </TableCell>
+                  <TableCell>
+                    {formatBigInt(epoch.totalDelegatorRewards)}
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>
