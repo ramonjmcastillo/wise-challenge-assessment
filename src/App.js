@@ -1,12 +1,18 @@
 import React from "react";
 import "./App.css";
 import { Typography, Box } from "@mui/material";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./apollo/client";
+import Home from "./pages/home";
 
 function App() {
   return (
-    <Box>
-      <Typography> Wise Challenge </Typography>
-    </Box>
+    <ApolloProvider client={client}>
+      <Box>
+        <Typography> Wise Challenge </Typography>
+        <Home />
+      </Box>
+    </ApolloProvider>
   );
 }
 
