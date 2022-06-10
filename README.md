@@ -8,6 +8,6 @@ Some things to improve on if the assessment is not expected to be done in ~2 hou
 
 1. Add a Skeleton Component to improve user experience when data is still loading
 2. Add Debounce to searching
-3. Probably refactor the Table Sort into it's own component
+3. Improve on Graphql
 4. Check for more bugs
 5. Improve styling
